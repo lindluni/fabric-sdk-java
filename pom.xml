@@ -550,9 +550,15 @@
         </plugins>
     </build>
     <distributionManagement>
+        <repository>
+            <id>central</id>
+            <name>aolshared1-releases</name>
+            <url>https://hyperledger.jfrog.io/hyperledger/fabric-maven</url>
+        </repository>
         <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <id>snapshots</id>
+            <name>aolshared1-snapshots</name>
+            <url>https://hyperledger.jfrog.io/hyperledger/fabric-maven</url>
         </snapshotRepository>
     </distributionManagement>
     <profiles>

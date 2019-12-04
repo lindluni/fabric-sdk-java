@@ -1,0 +1,27 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+name: $(SourceBranchName)-$(Date:yyyyMMdd)$(Rev:.rrr)
+trigger: none
+pr: none
+
+variables:
+  - group: Azure
+
+pool:
+  vmImage: "ubuntu-latest"
+
+jobs:
+  - job: Publish
+    steps:
+      - checkout: self
+      - script: mkdir ~/.m2
+        displayName: Create Local Maven Repo
+      - script: cp settings.xml ~/.m2/settings.xml
+        displayName: Deploy Maven Settings
+      - script: mvn deploy -DskipTests
+        env:
+          ARTIFACTORY_USERNAME: $(ARTIFACTORY_USERNAME)
+          ARTIFACTORY_PASSWORD: $(ARTIFACTORY_PASSWORD)
+        displayName: Build and Publish JAR
